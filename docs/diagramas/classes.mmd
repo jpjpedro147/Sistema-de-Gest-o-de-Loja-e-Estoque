@@ -1,0 +1,149 @@
+classDiagram
+direction LR
+
+class Usuario {
+  -int id
+  -String nome
+  -String login
+  -String senhaHash
+  -Perfil perfil
+  -boolean ativo
+  +autenticar(login, senha) boolean
+  +temPermissao(acao) boolean
+}
+class Perfil {
+  <<enumeration>>
+  ADMINISTRADOR
+  GERENTE
+  VENDEDOR
+  ESTOQUISTA
+}
+class Categoria {
+  -int id
+  -String nome
+}
+class Produto {
+  -int id
+  -String codigo
+  -String nome
+  -BigDecimal custo
+  -BigDecimal precoVenda
+  -int saldo
+  -int estoqueMinimo
+  -boolean ativo
+  +baixarEstoque(qtd)
+  +reporEstoque(qtd)
+  +ajustarSaldo(qtdContada)
+  +abaixoDoMinimo() boolean
+}
+class Fornecedor {
+  -int id
+  -String razaoSocial
+  -String cnpj
+  -String contato
+  -boolean ativo
+}
+class Cliente {
+  -int id
+  -String nome
+  -String cpf
+  -String telefone
+}
+class Venda {
+  -int id
+  -LocalDateTime data
+  -BigDecimal desconto
+  -SituacaoVenda situacao
+  +calcularTotal() BigDecimal
+  +aplicarDesconto(valor, autorizador)
+  +finalizar()
+  +cancelar(motivo)
+}
+class SituacaoVenda {
+  <<enumeration>>
+  ABERTA
+  PAGA
+  CANCELADA
+}
+class ItemVenda {
+  -int quantidade
+  -BigDecimal precoUnitario
+  +subtotal() BigDecimal
+}
+class Pagamento {
+  -FormaPagamento forma
+  -BigDecimal valor
+  -BigDecimal troco
+}
+class FormaPagamento {
+  <<enumeration>>
+  DINHEIRO
+  CARTAO
+  PIX
+}
+class Devolucao {
+  -int id
+  -LocalDate data
+  -int quantidade
+  -String motivo
+  +valorEstorno() BigDecimal
+}
+class PedidoCompra {
+  -int id
+  -LocalDate dataCriacao
+  -SituacaoPedido situacao
+  +valorTotal() BigDecimal
+  +enviarParaAprovacao()
+  +aprovar()
+  +rejeitar(motivo)
+  +receber(itens)
+  +cancelar()
+}
+class SituacaoPedido {
+  <<enumeration>>
+  RASCUNHO
+  AGUARDANDO_APROVACAO
+  ENVIADO
+  RECEBIDO_PARCIALMENTE
+  RECEBIDO
+  CANCELADO
+}
+class ItemPedidoCompra {
+  -int qtdPedida
+  -int qtdRecebida
+  -BigDecimal custoUnitario
+}
+class MovimentacaoEstoque {
+  -int id
+  -LocalDateTime data
+  -TipoMovimentacao tipo
+  -int quantidade
+  -String motivo
+}
+class TipoMovimentacao {
+  <<enumeration>>
+  VENDA
+  CANCELAMENTO
+  DEVOLUCAO
+  RECEBIMENTO
+  AJUSTE
+}
+
+Usuario --> Perfil
+Categoria "1" --> "*" Produto
+Venda "1" *-- "1..*" ItemVenda
+Venda "1" *-- "1..*" Pagamento
+Venda "*" --> "0..1" Cliente
+Venda "*" --> "1" Usuario : vendedor
+Venda --> SituacaoVenda
+Pagamento --> FormaPagamento
+ItemVenda "*" --> "1" Produto
+Devolucao "*" --> "1" ItemVenda
+Devolucao "*" --> "1" Usuario : registradaPor
+PedidoCompra "1" *-- "1..*" ItemPedidoCompra
+PedidoCompra "*" --> "1" Fornecedor
+PedidoCompra "*" --> "1" Usuario : criadoPor
+PedidoCompra --> SituacaoPedido
+ItemPedidoCompra "*" --> "1" Produto
+MovimentacaoEstoque "*" --> "1" Produto
+MovimentacaoEstoque --> TipoMovimentacao

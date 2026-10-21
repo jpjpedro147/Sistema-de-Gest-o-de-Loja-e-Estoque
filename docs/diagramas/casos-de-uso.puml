@@ -1,0 +1,57 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor Administrador as ADM
+actor Gerente as GER
+actor Vendedor as VEN
+actor Estoquista as EST
+
+rectangle "Sistema de Gestão de Loja e Estoque" {
+  usecase "UC01 Autenticar usuário" as UC01
+  usecase "UC02 Gerenciar usuários e perfis" as UC02
+  usecase "UC03 Gerenciar produtos" as UC03
+  usecase "UC04 Gerenciar categorias" as UC04
+  usecase "UC05 Gerenciar fornecedores" as UC05
+  usecase "UC06 Gerenciar clientes" as UC06
+  usecase "UC07 Registrar venda" as UC07
+  usecase "UC08 Aplicar desconto" as UC08
+  usecase "UC09 Registrar pagamento" as UC09
+  usecase "UC10 Cancelar venda" as UC10
+  usecase "UC11 Registrar devolução" as UC11
+  usecase "UC12 Criar pedido de compra" as UC12
+  usecase "UC13 Aprovar e enviar pedido de compra" as UC13
+  usecase "UC14 Receber mercadoria" as UC14
+  usecase "UC15 Ajustar estoque" as UC15
+  usecase "UC16 Consultar estoque e alertas de reposição" as UC16
+  usecase "UC17 Emitir relatório de vendas" as UC17
+  usecase "UC18 Emitir relatório de estoque" as UC18
+  usecase "UC19 Consultar histórico de movimentações" as UC19
+}
+
+ADM --> UC01
+GER --> UC01
+VEN --> UC01
+EST --> UC01
+ADM --> UC02
+GER --> UC03
+GER --> UC04
+GER --> UC05
+VEN --> UC06
+VEN --> UC07
+VEN --> UC08
+GER --> UC08
+GER --> UC10
+VEN --> UC11
+EST --> UC12
+GER --> UC13
+EST --> UC14
+EST --> UC15
+EST --> UC16
+GER --> UC17
+GER --> UC18
+EST --> UC19
+
+UC07 ..> UC09 : <<include>>
+UC08 ..> UC07 : <<extend>>
+UC12 ..> UC16 : <<extend>>
+@enduml
