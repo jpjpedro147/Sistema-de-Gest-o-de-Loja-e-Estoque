@@ -317,4 +317,4 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 3. Sistema exibe o saldo após cada movimentação
 
 **Extensões:**
-- 2a. Nenhuma movimentação no período: informar que não há dados
+- 2a. Nenhuma movimentação no período: informar que não há dados.
