@@ -27,29 +27,30 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 **Entidade com ciclo de vida — Pedido de Compra:** Rascunho → Aguardando aprovação → Enviado → Recebido parcialmente → Recebido; Cancelado (a partir de Rascunho, Aguardando aprovação ou Enviado).
 
-## 5. Histórias de usuário (Product Backlog, por prioridade)
-| ID | História | Prioridade |
-|---|---|---|
-| US01 | Como usuário, eu gostaria de fazer login para acessar as funções do meu perfil | Alta |
-| US02 | Como administrador, eu gostaria de cadastrar usuários e definir seus perfis | Alta |
-| US03 | Como gerente, eu gostaria de cadastrar produtos com preço e estoque mínimo | Alta |
-| US04 | Como gerente, eu gostaria de organizar produtos em categorias | Média |
-| US05 | Como vendedor, eu gostaria de registrar uma venda com vários itens | Alta |
-| US06 | Como vendedor, eu gostaria de registrar a forma de pagamento da venda | Alta |
-| US07 | Como vendedor, eu gostaria de aplicar desconto em uma venda | Média |
-| US08 | Como gerente, eu gostaria de autorizar descontos altos | Média |
-| US09 | Como vendedor, eu gostaria de cadastrar clientes para vincular às vendas | Média |
-| US10 | Como vendedor, eu gostaria de registrar a devolução de itens vendidos | Média |
-| US11 | Como gerente, eu gostaria de cancelar uma venda indevida | Média |
-| US12 | Como estoquista, eu gostaria de ser avisado de produtos com estoque baixo | Alta |
-| US13 | Como estoquista, eu gostaria de criar pedidos de compra para repor produtos | Alta |
-| US14 | Como gerente, eu gostaria de aprovar e enviar pedidos de compra | Alta |
-| US15 | Como gerente, eu gostaria de cadastrar fornecedores | Média |
-| US16 | Como estoquista, eu gostaria de registrar o recebimento total ou parcial de um pedido | Alta |
-| US17 | Como estoquista, eu gostaria de ajustar o estoque após o inventário | Média |
-| US18 | Como estoquista, eu gostaria de consultar o histórico de movimentações de um produto | Baixa |
-| US19 | Como gerente, eu gostaria de um relatório de vendas por período | Média |
-| US20 | Como gerente, eu gostaria de um relatório de estoque com valor total e curva ABC | Baixa |
+## 5. Histórias de usuário (Product Backlog)
+
+| HU | História | Prioridade | Critérios de aceitação | Issue | UC |
+|---|---|---|---|---|---|
+| HU01 | Como usuário, quero fazer login, para acessar as funções do meu perfil | P1 (Alta) | Credenciais válidas liberam as funções do perfil; inválidas exibem erro | #1 | UC01 |
+| HU02 | Como administrador, quero cadastrar usuários e definir seus perfis, para controlar quem acessa cada função | P1 (Alta) | O usuário é salvo com login único e perfil definido | #2 | UC02 |
+| HU03 | Como gerente, quero cadastrar produtos com preço e estoque mínimo, para manter o catálogo atualizado | P1 (Alta) | O produto é salvo com código único e preço maior que zero | #3 | UC03 |
+| HU04 | Como gerente, quero organizar produtos em categorias, para facilitar a busca e os relatórios | P2 (Média) | A categoria é salva e pode ser vinculada a produtos | #10 | UC04 |
+| HU05 | Como vendedor, quero registrar uma venda com vários itens, para atender o cliente no balcão | P1 (Alta) | O total é calculado e o estoque baixado ao finalizar; item acima do saldo é recusado | #4 | UC07 |
+| HU06 | Como vendedor, quero registrar a forma de pagamento da venda, para concluí-la | P1 (Alta) | Pagamento em dinheiro calcula o troco; a venda só fecha com o valor coberto | #5 | UC09 |
+| HU07 | Como vendedor, quero aplicar desconto em uma venda, para fechar negócio com o cliente | P2 (Média) | O total é recalculado; desconto acima de 10% exige autorização | #11 | UC08 |
+| HU08 | Como gerente, quero autorizar descontos altos, para evitar prejuízo à loja | P2 (Média) | Desconto acima de 10% só é aplicado depois da autorização do gerente | #12 | UC08 |
+| HU09 | Como vendedor, quero cadastrar clientes, para vincular às vendas | P2 (Média) | O cliente é salvo com CPF válido e único | #13 | UC06 |
+| HU10 | Como vendedor, quero registrar a devolução de itens vendidos, para corrigir a venda e repor o estoque | P2 (Média) | A devolução repõe o estoque e calcula o estorno; prazo acima de 30 dias é recusado | #14 | UC11 |
+| HU11 | Como gerente, quero cancelar uma venda indevida, para corrigir erros de registro | P2 (Média) | A venda fica cancelada e os itens voltam ao estoque | #15 | UC10 |
+| HU12 | Como estoquista, quero ser avisado de produtos com estoque baixo, para repor antes de faltar | P1 (Alta) | Produtos com saldo menor ou igual ao estoque mínimo aparecem destacados | #6 | UC16 |
+| HU13 | Como estoquista, quero criar pedidos de compra, para repor produtos com os fornecedores | P1 (Alta) | O pedido é salvo como Aguardando aprovação, com o valor total estimado | #7 | UC12 |
+| HU14 | Como gerente, quero aprovar e enviar pedidos de compra, para controlar os gastos com reposição | P1 (Alta) | O pedido aprovado passa para Enviado; o rejeitado volta para Rascunho | #8 | UC13 |
+| HU15 | Como gerente, quero cadastrar fornecedores, para emitir pedidos de compra | P2 (Média) | O fornecedor é salvo com CNPJ válido e único | #16 | UC05 |
+| HU16 | Como estoquista, quero registrar o recebimento total ou parcial de um pedido, para atualizar o estoque | P1 (Alta) | O saldo é atualizado e o pedido fica Recebido ou Recebido parcialmente | #9 | UC14 |
+| HU17 | Como estoquista, quero ajustar o estoque após o inventário, para manter o saldo igual ao físico | P2 (Média) | O ajuste exige motivo e registra a movimentação | #17 | UC15 |
+| HU18 | Como estoquista, quero consultar o histórico de movimentações de um produto, para entender as variações do saldo | P3 (Baixa) | A lista mostra entradas, saídas, ajustes e devoluções do período | #19 | UC19 |
+| HU19 | Como gerente, quero um relatório de vendas por período, para acompanhar o desempenho da loja | P2 (Média) | O relatório totaliza vendas, descontos e devoluções | #18 | UC17 |
+| HU20 | Como gerente, quero um relatório de estoque com valor total e curva ABC, para decidir o que repor | P3 (Baixa) | O relatório mostra o valor total ao custo e a classificação A, B ou C | #20 | UC18 |
 
 ## 6. Lista de casos de uso e rastreabilidade
 | ID | Caso de uso | Ator principal | Origem |
@@ -292,4 +293,4 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 3. Sistema exibe o saldo após cada movimentação
 
 **Extensões:**
-- 2a. Nenhuma movimentação no período: informar que não há dados
+- 2a. Nenhuma movimentação no período: informar que não há dados.
