@@ -55,25 +55,25 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 ## 6. Lista de casos de uso e rastreabilidade
 | ID | Caso de uso | Ator principal | Origem |
 |---|---|---|---|
-| UC01 | Autenticar usuário | Todos | US01 |
-| UC02 | Gerenciar usuários e perfis (CRUD) | Administrador | US02 |
-| UC03 | Gerenciar produtos (CRUD) | Gerente | US03 |
-| UC04 | Gerenciar categorias (CRUD) | Gerente | US04 |
-| UC05 | Gerenciar fornecedores (CRUD) | Gerente | US15 |
-| UC06 | Gerenciar clientes (CRUD) | Vendedor | US09 |
-| UC07 | Registrar venda | Vendedor | US05 |
-| UC08 | Aplicar desconto | Vendedor | US07, US08 |
-| UC09 | Registrar pagamento | Vendedor | US06 |
-| UC10 | Cancelar venda | Gerente | US11 |
-| UC11 | Registrar devolução | Vendedor | US10 |
-| UC12 | Criar pedido de compra | Estoquista | US13 |
-| UC13 | Aprovar e enviar pedido de compra | Gerente | US14 |
-| UC14 | Receber mercadoria | Estoquista | US16 |
-| UC15 | Ajustar estoque | Estoquista | US17 |
-| UC16 | Consultar estoque e alertas de reposição | Estoquista | US12 |
-| UC17 | Emitir relatório de vendas | Gerente | US19 |
-| UC18 | Emitir relatório de estoque | Gerente | US20 |
-| UC19 | Consultar histórico de movimentações | Estoquista | US18 |
+| UC01 | Autenticar usuário | Todos | HU01 |
+| UC02 | Gerenciar usuários e perfis (CRUD) | Administrador | HU02 |
+| UC03 | Gerenciar produtos (CRUD) | Gerente | HU03 |
+| UC04 | Gerenciar categorias (CRUD) | Gerente | HU04 |
+| UC05 | Gerenciar fornecedores (CRUD) | Gerente | HU15 |
+| UC06 | Gerenciar clientes (CRUD) | Vendedor | HU09 |
+| UC07 | Registrar venda | Vendedor | HU05 |
+| UC08 | Aplicar desconto | Vendedor | HU07, HU08 |
+| UC09 | Registrar pagamento | Vendedor | HU06 |
+| UC10 | Cancelar venda | Gerente | HU11 |
+| UC11 | Registrar devolução | Vendedor | HU10 |
+| UC12 | Criar pedido de compra | Estoquista | HU13 |
+| UC13 | Aprovar e enviar pedido de compra | Gerente | HU14 |
+| UC14 | Receber mercadoria | Estoquista | HU16 |
+| UC15 | Ajustar estoque | Estoquista | HU17 |
+| UC16 | Consultar estoque e alertas de reposição | Estoquista | HU12 |
+| UC17 | Emitir relatório de vendas | Gerente | HU19 |
+| UC18 | Emitir relatório de estoque | Gerente | HU20 |
+| UC19 | Consultar histórico de movimentações | Estoquista | HU18 |
 
 19 casos de uso, 5 CRUD, 4 atores. Relações do diagrama: UC07 inclui UC09; UC08 estende UC07; UC12 estende UC16. Nos demais casos de uso (exceto UC01), a pré-condição é o usuário estar autenticado (UC01) com o perfil do ator.
 
@@ -81,6 +81,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC01 — Autenticar usuário
 **Ator:** Todos os atores
+
 **Fluxo normal:**
 1. Usuário informa login e senha
 2. Sistema valida as credenciais
@@ -94,14 +95,18 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC02 — Gerenciar usuários e perfis
 **Ator:** Administrador
+
 **Fluxo normal:** o administrador cadastra, consulta, altera e desativa usuários, informando nome, login, senha e perfil (Administrador, Gerente, Vendedor ou Estoquista).
+
 **Extensões:**
 - a. Login já existente: solicitar outro login
 - b. Desativar o último administrador ativo: negar a operação
 
 ### UC03 — Gerenciar produtos
 **Ator:** Gerente
+
 **Fluxo normal:** o gerente cadastra, consulta, altera e inativa produtos, informando código, nome, categoria, custo, preço de venda e estoque mínimo.
+
 **Extensões:**
 - a. Código já existente: solicitar outro código
 - b. Preço de venda menor ou igual a zero: solicitar novo valor
@@ -109,26 +114,33 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC04 — Gerenciar categorias
 **Ator:** Gerente
+
 **Fluxo normal:** o gerente cadastra, consulta, altera e exclui categorias de produtos.
+
 **Extensões:**
 - a. Nome já existente: solicitar outro nome
 - b. Excluir categoria com produtos: negar a operação
 
 ### UC05 — Gerenciar fornecedores
 **Ator:** Gerente
+
 **Fluxo normal:** o gerente cadastra, consulta, altera e inativa fornecedores, informando razão social, CNPJ e contato.
+
 **Extensões:**
 - a. CNPJ inválido ou já cadastrado: solicitar novo CNPJ
 - b. Inativar fornecedor com pedido em andamento: negar a operação
 
 ### UC06 — Gerenciar clientes
 **Ator:** Vendedor
+
 **Fluxo normal:** o vendedor cadastra, consulta, altera e inativa clientes, informando nome, CPF e telefone.
+
 **Extensões:**
 - a. CPF inválido ou já cadastrado: solicitar novo CPF
 
 ### UC07 — Registrar venda
 **Ator:** Vendedor
+
 **Fluxo normal:**
 1. Vendedor inicia uma nova venda
 2. Vendedor informa o cliente
@@ -149,6 +161,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC08 — Aplicar desconto
 **Ator:** Vendedor (apoio: Gerente)
+
 **Fluxo normal:**
 1. Vendedor informa o desconto (valor ou percentual)
 2. Sistema valida o desconto contra o limite (RN02)
@@ -162,6 +175,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC09 — Registrar pagamento
 **Ator:** Vendedor
+
 **Fluxo normal:**
 1. Vendedor seleciona a forma de pagamento (dinheiro, cartão ou Pix)
 2. Vendedor informa o valor recebido
@@ -174,6 +188,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC10 — Cancelar venda
 **Ator:** Gerente
+
 **Fluxo normal:**
 1. Gerente pesquisa a venda
 2. Gerente informa o motivo do cancelamento
@@ -186,6 +201,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC11 — Registrar devolução
 **Ator:** Vendedor
+
 **Fluxo normal:**
 1. Vendedor pesquisa a venda original
 2. Vendedor seleciona os itens e as quantidades devolvidos
@@ -200,6 +216,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC12 — Criar pedido de compra
 **Ator:** Estoquista
+
 **Fluxo normal:**
 1. Estoquista seleciona o fornecedor
 2. Estoquista informa produtos e quantidades
@@ -214,6 +231,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC13 — Aprovar e enviar pedido de compra
 **Ator:** Gerente
+
 **Fluxo normal:**
 1. Gerente consulta os pedidos aguardando aprovação
 2. Gerente seleciona um pedido e confere itens e valor
@@ -226,6 +244,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC14 — Receber mercadoria
 **Ator:** Estoquista
+
 **Fluxo normal:**
 1. Estoquista seleciona um pedido na situação "Enviado" ou "Recebido parcialmente"
 2. Estoquista informa a quantidade recebida de cada item
@@ -239,6 +258,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC15 — Ajustar estoque
 **Ator:** Estoquista
+
 **Fluxo normal:**
 1. Estoquista seleciona o produto
 2. Estoquista informa a quantidade contada no inventário
@@ -253,6 +273,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC16 — Consultar estoque e alertas de reposição
 **Ator:** Estoquista
+
 **Fluxo normal:**
 1. Estoquista informa filtros (produto ou categoria)
 2. Sistema lista os produtos com o saldo atual
@@ -264,6 +285,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC17 — Emitir relatório de vendas
 **Ator:** Gerente
+
 **Fluxo normal:**
 1. Gerente informa o período
 2. Sistema totaliza vendas, descontos e devoluções do período
@@ -275,6 +297,7 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC18 — Emitir relatório de estoque
 **Ator:** Gerente
+
 **Fluxo normal:**
 1. Gerente seleciona a categoria
 2. Sistema calcula o valor total do estoque ao preço de custo
@@ -287,10 +310,11 @@ Sistema desktop (Java 21 + JavaFX + SQLite) para uma loja de varejo controlar o 
 
 ### UC19 — Consultar histórico de movimentações
 **Ator:** Estoquista
+
 **Fluxo normal:**
 1. Estoquista informa o produto e o período
 2. Sistema lista as entradas, saídas, ajustes e devoluções do período
 3. Sistema exibe o saldo após cada movimentação
 
 **Extensões:**
-- 2a. Nenhuma movimentação no período: informar que não há dados.
+- 2a. Nenhuma movimentação no período: informar que não há dados
