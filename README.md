@@ -5,10 +5,11 @@
 **Disciplina:** Análise e Projeto de Sistemas
 
 ## Integrantes
-- João Pedro Dionìsio
-- Higor Ferreira
 - Enzo Leal
 - Gustavo Mendes
+- Higor Ferreira
+- João Paulo 
+- J. Pedro Dionísio
 
 ## Tecnologias
 Java 21 · JavaFX · SQLite (sqlite-jdbc) · JDBC · Maven
