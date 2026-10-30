@@ -31,4 +31,4 @@ O banco SQLite (arquivo local) é criado pelo próprio sistema na primeira execu
 - Diagrama de classes: [docs/diagramas/classes.md](docs/diagramas/classes.md)
 
 ## Product Backlog
-Histórias de usuário nas [Issues](../../issues), ordenadas por prioridade (labels `prioridade-alta`, `prioridade-media`, `prioridade-baixa`).
+Histórias de usuário nas [Issues](../../issues), ordenadas por prioridade (labels `prioridade-alta`, `prioridade-media`, `prioridade-baixa`)
